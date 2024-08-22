@@ -3,10 +3,10 @@
 ## Build the container
 
 ```sh
-podman build -t localhost/vagrant-container-fedora:latest -f Dockerfile.(fedora || ubuntu) .
+podman build -t localhost/vagrant-container-fedora:latest -f Dockerfile.(fedora || ubuntu || almalinux) .
 ```
 
-## Create a ~/.local/bin/vagrant-(fedora || ubuntu)
+## Create a ~/.local/bin/vagrant-(fedora || ubuntu || almalinux)
 
 ```sh
 #! /bin/env bash
