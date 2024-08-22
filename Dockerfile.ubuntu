@@ -10,4 +10,7 @@ RUN sed -i -e '/^# deb-src.*universe$/s/# //g' /etc/apt/sources.list \
 RUN apt install nfs-kernel-server ebtables dnsmasq-base libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev -y \
     && apt -y build-dep vagrant ruby-libvirt \
     && vagrant plugin install vagrant-libvirt 
+RUN apt install python3 python3-pip \
+    && python3 -m pip install --upgrade pip \
+    && pip3 install podman-compose ansible ansible-core
 CMD [ "/bin/bash" ]
