@@ -1,5 +1,12 @@
 # Vangrat libvirt containerized
 
+## Build the container
+
+```sh
+podman build -t localhost/vagrant-container-fedora:latest -f Dockerfile.(fedora || ubuntu) .
+```
+
+## Create a ~/.local/bin/vagrant-(fedora || ubuntu)
 
 ```sh
 #! /bin/env bash
