@@ -1,0 +1,24 @@
+name: Docker Image CI for GHCR
+
+on:
+  push:
+    # paths:
+    # - 'Docker.*'
+
+env:
+  GITHUB_REGISTRY: ghcr.io
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distroname: [almalinux, fedora, ubuntu]  # Define the matrix
+    continue-on-error: true  # Allow each matrix job to continue on failure
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and publish the images
+        run: |
+          podman login --username $GITHUB_REPOSITORY_OWNER --password ${{ secrets.GHCR_SECRET }} ${{ env.GITHUB_REGISTRY }}
+          podman build --tag ghcr.io/$GITHUB_REPOSITORY_OWNER/vagrant-container-${{ matrix.distroname }}:latest -f Dockerfile.${{ matrix.distroname }} .
+          podman push ghcr.io/$GITHUB_REPOSITORY_OWNER/vagrant-container-${{ matrix.distroname }}:latest
